@@ -10,7 +10,7 @@ class Main extends Component {
         <table className="table table-borderless text-muted text-center">
           <thead>
             <tr>
-              <th scope="col">Staking Balance</th>
+              <th scope="col">Staking Balance mDAI</th>
               <th scope="col">Reward Balance</th>
             </tr>
           </thead>

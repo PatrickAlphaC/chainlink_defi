@@ -1413,12 +1413,12 @@
     "42": {
       "events": {},
       "links": {},
-      "address": "0x8900a500Ea445CfB17930113D70Ca7A6b50042B0",
-      "transactionHash": "0x424a32998ebd54bb4e7182f849eae336c9bbead729495813e5559a40642b623b"
+      "address": "0xBF52b9c4AF4D44233146a44f8553DF36b79AF1d0",
+      "transactionHash": "0x2f0b05b065fe1a74230fa1b94ea066a347e354be152abea7030e5e1081971a31"
     }
   },
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-09-11T14:05:32.681Z",
+  "updatedAt": "2020-09-11T17:39:52.420Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

@@ -1,25 +1,25 @@
 pragma solidity ^0.6.0;
 
-import "./DappToken.sol";
-import "./DaiToken.sol";
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
 
 contract TokenFarm {
     string public name = "Dapp Token Farm";
     address public owner;
-    DappToken public dappToken;
+    IERC20 public dappToken;
     IERC20 public daiToken;
+    // IERC20 public linkToken;
 
     address[] public stakers;
     mapping(address => uint) public stakingBalance;
     mapping(address => bool) public hasStaked;
     mapping(address => bool) public isStaking;
 
-    constructor(DappToken _dappToken, IERC20 _daiTokenAddress) public {
-        dappToken = _dappToken;
+    constructor(IERC20 _dappTokenAddress, IERC20 _daiTokenAddress) public {
+        dappToken = IERC20(_dappTokenAddress);
         daiToken = IERC20(_daiTokenAddress);
+        // Specific for Kovan
+        // linkToken = IERC20(0xa36085F69e2889c224210F603D836748e7dC0088);
         owner = msg.sender;
     }
 
