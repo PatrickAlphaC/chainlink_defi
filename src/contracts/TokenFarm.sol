@@ -1,22 +1,25 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 import "./DappToken.sol";
 import "./DaiToken.sol";
+import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 
 contract TokenFarm {
     string public name = "Dapp Token Farm";
     address public owner;
     DappToken public dappToken;
-    DaiToken public daiToken;
+    IERC20 public daiToken;
 
     address[] public stakers;
     mapping(address => uint) public stakingBalance;
     mapping(address => bool) public hasStaked;
     mapping(address => bool) public isStaking;
 
-    constructor(DappToken _dappToken, DaiToken _daiToken) public {
+    constructor(DappToken _dappToken, IERC20 _daiTokenAddress) public {
         dappToken = _dappToken;
-        daiToken = _daiToken;
+        daiToken = IERC20(_daiTokenAddress);
         owner = msg.sender;
     }
 
@@ -68,8 +71,20 @@ contract TokenFarm {
             address recipient = stakers[i];
             uint balance = stakingBalance[recipient];
             if(balance > 0) {
-                dappToken.transfer(recipient, balance);
+                dappToken.transfer(recipient, (balance * getDaiEthPrice()) / (10 ** 18));
             }
         }
+    }
+
+    function getDaiEthPrice() public view returns (uint){
+        AggregatorV3Interface priceFeed = AggregatorV3Interface(0x777A68032a88E5A84678A77Af2CD65A7b3c0775a);
+        (
+            uint80 roundID, 
+            int price,
+            uint startedAt,
+            uint timeStamp,
+            uint80 answeredInRound
+        ) = priceFeed.latestRoundData();
+        return uint(price * (10 ** 10));
     }
 }
