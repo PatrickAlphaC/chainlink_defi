@@ -11,10 +11,16 @@ export MNEMONIC="apple, cheese, etc...."
 export RPC_URL="https://kovan.infura.io/v3/adfdsfasdfadsfasdfadfadfadf"
 
 ```
+You will need Truffle installed too 
 Then run:
 ```
-npm install
-npm install truffle -g
+yarn
 truffle migrate --reset --network live
 yarn start
+```
+You can now stake and unstake your mDAI. 
+
+To issue tokens run
+```
+truffle exec scripts/issue-tokens.js
 ```
