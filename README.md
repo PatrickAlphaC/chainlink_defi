@@ -1,6 +1,6 @@
 # chainlink_defi
 
-This repo allows you to stake your mDAI and receive DAPP token as a reward (and can do yeild farming). It gets the Kovan price feed of DAI/USD to calculate value. 
+This repo allows you to stake your FAU/LINK/ Any accepted ERC20 and receive DAPP token as a reward (and can do yeild farming). It gets the Kovan price feed of the ERC with ETH to calculate value. 
 
 To get started clone this repo.
 

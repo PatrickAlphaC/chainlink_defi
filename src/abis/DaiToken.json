@@ -876,12 +876,12 @@
         }
       },
       "links": {},
-      "address": "0x67A70CddB71018f9901424ed4B9aC2A71Fcfc5a7",
-      "transactionHash": "0x01ed443ce4dd75de7b79f41645eb0083cf42fa1334d0d75b124ec26bad85ff9c"
+      "address": "0xB1644F1942A72fC7Ca1F16F80a5c4862e1C7a379",
+      "transactionHash": "0x93291a38250c69e52e946aa1bd3da13fd8a0eb4e2a8704ea6d59a343e4be222d"
     }
   },
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-09-11T17:39:52.415Z",
+  "updatedAt": "2020-09-13T02:55:32.747Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

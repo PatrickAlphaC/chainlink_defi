@@ -5,6 +5,7 @@
   "author": "gregory@dappuniversity.com",
   "dependencies": {
     "@chainlink/contracts": "^0.0.9",
+    "@openzeppelin/contracts": "^3.2.0",
     "@truffle/hdwallet-provider": "^1.0.44",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
