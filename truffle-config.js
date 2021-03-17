@@ -1,5 +1,5 @@
-require('babel-register');
-require('babel-polyfill');
+require('babel-register')
+require('babel-polyfill')
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     },
     live: {
       provider: () => {
-        return new HDWalletProvider(process.env.MNEMONIC, process.env.RPC_URL)
+        return new HDWalletProvider(process.env.MNEMONIC, process.env.KOVAN_RPC_URL)
       },
       network_id: '*',
       // ~~Necessary due to https://github.com/trufflesuite/truffle/issues/1971~~
