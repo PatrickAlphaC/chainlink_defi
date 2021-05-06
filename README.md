@@ -8,7 +8,7 @@ To get started clone this repo.
 Set your `MNEMONIC` and `RPC_URL` 
 ```
 export MNEMONIC="apple, cheese, etc...."
-export RPC_URL="https://kovan.infura.io/v3/adfdsfasdfadsfasdfadfadfadf"
+export KOVAN_RPC_URL="https://kovan.infura.io/v3/adfdsfasdfadsfasdfadfadfadf"
 
 ```
 You will need Truffle installed too 
