@@ -1,11 +1,11 @@
 # chainlink_defi
 
-This repo allows you to stake your FAU/LINK/DAPP or any accepted ERC20 and receive DAPP token as a reward (and can do yeild farming). It gets the Kovan price feed of the ERC with ETH to calculate value. 
+This repo allows you to stake your FAU/LINK/DAPP or any accepted ERC20 and receive DAPP token as a reward (and can do yield farming). It gets the Kovan price feed of the ERC with ETH to calculate value. 
 
 To get started clone this repo.
 
 # Quickstart
-Set your `MNEMONIC` and `RPC_URL` 
+Set your `MNEMONIC` and `KOVAN_RPC_URL` 
 ```
 export MNEMONIC="apple, cheese, etc...."
 export KOVAN_RPC_URL="https://kovan.infura.io/v3/adfdsfasdfadsfasdfadfadfadf"
@@ -22,5 +22,5 @@ You can now stake and unstake your mDAI. Once you have some staked, you can issu
 
 To issue tokens run
 ```
-truffle exec scripts/issue-tokens.js
+truffle exec scripts/issue-token.js --network live
 ```

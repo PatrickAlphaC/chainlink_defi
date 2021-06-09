@@ -1,5 +1,3 @@
-require('babel-register')
-require('babel-polyfill')
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 
 module.exports = {
