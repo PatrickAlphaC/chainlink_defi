@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core"
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core"
 
-export default createMuiTheme({
+export default responsiveFontSizes(createMuiTheme({
     palette: {
         primary: {
             main: "#375bd2"
@@ -12,4 +12,4 @@ export default createMuiTheme({
     typography: {
         fontFamily: "'Montserrat', sans-serif"
     }
-})
+}))

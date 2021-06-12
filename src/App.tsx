@@ -4,7 +4,7 @@ import React from "react";
 // import TokenFarm from "../abis/TokenFarm.json"
 // import ERC20 from "../abis/ERC20.json"
 // import Navbar from "./Navbar"
-import { Header } from "./features/Header"
+import { Header } from "./features/Header";
 import { Main } from "./features/Main";
 import { DAppProvider } from "@usedapp/core";
 import { Container, ThemeProvider } from "@material-ui/core";
@@ -14,8 +14,8 @@ export const App = () => {
   return (
     <DAppProvider config={{}}>
       <ThemeProvider theme={customTheme}>
+        <Header />
         <Container maxWidth="md">
-          <Header />
           <Main />
         </Container>
       </ThemeProvider>

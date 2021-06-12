@@ -2,10 +2,11 @@ import React from "react";
 import chainlink from "../chainlink.png";
 import dapp from "../dapp.png";
 import dai from "../dai.png";
-import { YourWallet } from "./YourWallet"
-import { TokenFarmContract } from "./TokenFarmContract"
+import { YourWallet } from "./YourWallet";
+import { TokenFarmContract } from "./TokenFarmContract";
 import { useEthers } from "@usedapp/core";
 import DappToken from "../abis/DappToken.json";
+import { Typography, makeStyles } from "@material-ui/core";
 
 export type Token = {
   image: string;
@@ -13,15 +14,24 @@ export type Token = {
   name: string;
 };
 
-export const Main = () => {
+const useStyles = makeStyles((theme) => ({
+  title: {
+    color: theme.palette.common.white,
+    textAlign: "center",
+    padding: theme.spacing(4)
+  },
+}));
 
+export const Main = () => {
   const { chainId } = useEthers();
 
   const { networks } = DappToken;
 
   const dappTokenData = chainId ? networks[chainId] : undefined;
 
-  const { address: dappTokenAddress } = dappTokenData || {}
+  const { address: dappTokenAddress } = dappTokenData || {};
+
+  const classes = useStyles()
 
   const supportedTokens: Array<Token> = [
     {
@@ -43,6 +53,15 @@ export const Main = () => {
 
   return (
     <>
+      <Typography
+        variant="h2"
+        component="h1"
+        classes={{
+          root: classes.title,
+        }}
+      >
+        Dapp Token Farm
+      </Typography>
       <YourWallet supportedTokens={supportedTokens} />
       <TokenFarmContract supportedTokens={supportedTokens} />
     </>
