@@ -1,8 +1,8 @@
 import { useContractCall, useEthers } from "@usedapp/core";
 import TokenFarm from "../abis/TokenFarm.json";
-import { utils } from "ethers";
+import { utils, BigNumber } from "ethers";
 
-export const useStakingBalance = (address: string): number | undefined => {
+export const useStakingBalance = (address: string): BigNumber | undefined => {
   const { account, chainId } = useEthers();
 
   const { abi, networks } = TokenFarm;

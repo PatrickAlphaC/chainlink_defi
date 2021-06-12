@@ -4,6 +4,8 @@ import dapp from "../dapp.png";
 import dai from "../dai.png";
 import { YourWallet } from "./YourWallet"
 import { TokenFarmContract } from "./TokenFarmContract"
+import { useEthers } from "@usedapp/core";
+import DappToken from "../abis/DappToken.json";
 
 export type Token = {
   image: string;
@@ -12,6 +14,15 @@ export type Token = {
 };
 
 export const Main = () => {
+
+  const { chainId } = useEthers();
+
+  const { networks } = DappToken;
+
+  const dappTokenData = chainId ? networks[chainId] : undefined;
+
+  const { address: dappTokenAddress } = dappTokenData || {}
+
   const supportedTokens: Array<Token> = [
     {
       image: chainlink,
@@ -25,8 +36,7 @@ export const Main = () => {
     },
     {
       image: dapp,
-      // TODO: Load DAPP token address
-      address: "0x000",
+      address: dappTokenAddress,
       name: "DAPP",
     },
   ];
