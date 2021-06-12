@@ -1,18 +1,24 @@
-import React from "react"
+import React from "react";
 // import Web3 from "web3"
 // import DappToken from "../abis/DappToken.json"
 // import TokenFarm from "../abis/TokenFarm.json"
 // import ERC20 from "../abis/ERC20.json"
 // import Navbar from "./Navbar"
-import { Main } from "./Main"
-import "./App.css"
-import { DAppProvider } from "@usedapp/core"
+import { Main } from "./Main";
+import "./App.css";
+import { DAppProvider } from "@usedapp/core";
+import { ThemeProvider } from "@material-ui/core";
+import customTheme from "../themes/chainlink-blue";
 
 export const App = () => {
-  return <DAppProvider config={{}}>
-      <Main />
-  </DAppProvider>
-}
+  return (
+    <DAppProvider config={{}}>
+      <ThemeProvider theme={customTheme}>
+        <Main />
+      </ThemeProvider>
+    </DAppProvider>
+  );
+};
 
 // class App extends Component {
 //   async componentWillMount() {
