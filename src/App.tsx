@@ -4,12 +4,11 @@ import React from "react";
 // import TokenFarm from "../abis/TokenFarm.json"
 // import ERC20 from "../abis/ERC20.json"
 // import Navbar from "./Navbar"
-import { Header } from "./Header"
-import { Main } from "./Main";
-import "./App.css";
+import { Header } from "./features/Header"
+import { Main } from "./features/Main";
 import { DAppProvider } from "@usedapp/core";
 import { Container, ThemeProvider } from "@material-ui/core";
-import customTheme from "../themes/chainlink-blue";
+import customTheme from "./themes/chainlink-blue";
 
 export const App = () => {
   return (

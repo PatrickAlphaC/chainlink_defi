@@ -1,14 +1,9 @@
 import React from "react";
-import { SliderInput } from "../SliderInput";
+import { SliderInput } from "../components";
 import { useEthers, useTokenBalance } from "@usedapp/core";
 import { formatUnits } from "@ethersproject/units";
 import { Button, makeStyles } from "@material-ui/core";
-
-export type Token = {
-  image: string;
-  address: string;
-  name: string;
-};
+import { Token } from "./Main"
 
 export interface StakeFormProps {
   token: Token;
@@ -50,7 +45,6 @@ export const StakeForm = ({ token }: StakeFormProps) => {
       <Button color="primary" variant="contained" size="large">
         Stake
       </Button>
-      <Button color="secondary">Un-stake all</Button>
     </div>
   );
 };

@@ -2,8 +2,14 @@ import React from "react";
 import chainlink from "../chainlink.png";
 import dapp from "../dapp.png";
 import dai from "../dai.png";
-import { Token } from "./panels/StakeForm";
-import { YourWallet, TokenFarmContract } from "./panels";
+import { YourWallet } from "./YourWallet"
+import { TokenFarmContract } from "./TokenFarmContract"
+
+export type Token = {
+  image: string;
+  address: string;
+  name: string;
+};
 
 export const Main = () => {
   const supportedTokens: Array<Token> = [
