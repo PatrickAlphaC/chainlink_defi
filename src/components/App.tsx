@@ -4,17 +4,21 @@ import React from "react";
 // import TokenFarm from "../abis/TokenFarm.json"
 // import ERC20 from "../abis/ERC20.json"
 // import Navbar from "./Navbar"
+import { Header } from "./Header"
 import { Main } from "./Main";
 import "./App.css";
 import { DAppProvider } from "@usedapp/core";
-import { ThemeProvider } from "@material-ui/core";
+import { Container, ThemeProvider } from "@material-ui/core";
 import customTheme from "../themes/chainlink-blue";
 
 export const App = () => {
   return (
     <DAppProvider config={{}}>
       <ThemeProvider theme={customTheme}>
-        <Main />
+        <Container maxWidth="md">
+          <Header />
+          <Main />
+        </Container>
       </ThemeProvider>
     </DAppProvider>
   );
