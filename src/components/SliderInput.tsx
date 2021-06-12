@@ -26,6 +26,9 @@ export const SliderInput = ({
     }
   };
 
+  const sliderStep = maxValue / 100
+  const inputStep = maxValue / 50
+
   return (
     <div {...rest}>
       {label && (
@@ -37,9 +40,10 @@ export const SliderInput = ({
         <Grid item xs>
           <Slider
             value={typeof value === "number" ? value : 0}
-            step={0.1}
+            step={sliderStep}
             onChange={handleSliderChange}
             aria-labelledby={id}
+            max={maxValue}
           />
         </Grid>
         <Grid item>
@@ -49,7 +53,7 @@ export const SliderInput = ({
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{
-              step: 1,
+              step: inputStep,
               min: 0,
               max: maxValue,
               type: "number",

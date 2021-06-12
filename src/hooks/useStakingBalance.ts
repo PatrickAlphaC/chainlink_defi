@@ -20,7 +20,5 @@ export const useStakingBalance = (address: string): BigNumber | undefined => {
       args: [tokenAddress, account],
     }) ?? [];
 
-    console.log(stakingBalance)
-
   return stakingBalance;
 };

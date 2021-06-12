@@ -20,7 +20,7 @@ export const Header = () => {
         root: classes.root,
       }}
     >
-      DApp Token Farm
+      Dapp Token Farm
     </Typography>
   );
 };

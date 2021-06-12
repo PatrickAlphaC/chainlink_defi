@@ -25,12 +25,12 @@ export const TokenFarmContract = ({
         <TabContext value={selectedTokenIndex.toString()}>
           <TabList onChange={handleChange} aria-label="stake form tabs">
             {supportedTokens.map((token, index) => {
-              return <Tab label={token.name} value={index.toString()} />;
+              return <Tab label={token.name} value={index.toString()} key={index} />;
             })}
           </TabList>
           {supportedTokens.map((token, index) => {
             return (
-              <TabPanel value={index.toString()}>
+              <TabPanel value={index.toString()} key={index}>
                 <StakingBalance token={token} />
                 <Button color="secondary">Un-stake all</Button>
               </TabPanel>
