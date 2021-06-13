@@ -92,7 +92,7 @@ export const Main = () => {
       <TokenFarmContract supportedTokens={supportedTokens} />
       <Snackbar
         open={showNetworkError}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleCloseNetworkError}
       >
         <Alert onClose={handleCloseNetworkError} severity="warning">

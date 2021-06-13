@@ -13,7 +13,11 @@ import customTheme from "./themes/chainlink-blue";
 export const App = () => {
   return (
     <DAppProvider config={{
-      supportedChains: [ChainId.Kovan]
+      supportedChains: [ChainId.Kovan],
+      notifications: {
+        expirationPeriod: 1000,
+        checkInterval: 1000
+      }
     }}>
       <ThemeProvider theme={customTheme}>
         <Header />

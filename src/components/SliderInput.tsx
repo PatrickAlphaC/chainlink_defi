@@ -2,11 +2,12 @@ import React from "react";
 import { Slider, Input, Typography, Grid } from "@material-ui/core";
 
 interface SliderInputProps {
-  label: string;
-  id: string;
+  label?: string;
+  id?: string;
   maxValue: number;
   value: number | string | (string | number)[];
   onChange: (newValue: number | string | Array<number | string>) => void;
+  disabled?: boolean;
   [x:string]: any;
 }
 
@@ -16,6 +17,7 @@ export const SliderInput = ({
   maxValue,
   value,
   onChange,
+  disabled = false,
   ...rest
 }: SliderInputProps) => {
   const handleSliderChange = (event: any, newValue: number | number[]) => {
@@ -52,6 +54,7 @@ export const SliderInput = ({
             onChange={handleSliderChange}
             aria-labelledby={id}
             max={maxValue}
+            disabled={disabled}
           />
         </Grid>
         <Grid item>
@@ -60,6 +63,7 @@ export const SliderInput = ({
             margin="dense"
             onChange={handleInputChange}
             onBlur={handleBlur}
+            disabled={disabled}
             inputProps={{
               step: inputStep,
               min: 0,

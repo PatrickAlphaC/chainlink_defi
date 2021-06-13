@@ -40,7 +40,7 @@ export const useStakeTokens = (tokenAddress: string) => {
 
   useEffect(() => {
     if (approveErc20State.status === "Success") {
-      stakeTokensSend(amountToStake, tokenAddress)
+      stakeTokensSend(amountToStake, tokenAddress);
     }
   }, [approveErc20State]);
 
@@ -49,5 +49,15 @@ export const useStakeTokens = (tokenAddress: string) => {
     return approveErc20Send(tokenFarmContractAddress, amount);
   };
 
-  return { send, state: stakeTokensState };
+  const [state, setState] = useState(approveErc20State);
+
+  useEffect(() => {
+    if (approveErc20State.status === "Success") {
+      setState(stakeTokensState);
+    } else {
+      setState(approveErc20State);
+    }
+  }, [approveErc20State, stakeTokensState]);
+
+  return { send, state };
 };
