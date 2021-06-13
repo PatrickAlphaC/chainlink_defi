@@ -89,6 +89,8 @@ export const StakeForm = ({ token }: StakeFormProps) => {
 
   const isMining = stakeTokensState.status === "Mining";
 
+  const hasZeroAmount = parseFloat(amount.toString()) === 0
+
   return (
     <>
       <div className={classes.container}>
@@ -106,7 +108,7 @@ export const StakeForm = ({ token }: StakeFormProps) => {
           variant="contained"
           size="large"
           onClick={handleStakeSubmit}
-          disabled={isMining}
+          disabled={isMining || hasZeroAmount}
         >
           {isMining ? <CircularProgress size={26}/> : "Stake"}
         </Button>
