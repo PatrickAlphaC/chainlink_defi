@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { useContractFunction, useEthers } from "@usedapp/core";
 import TokenFarm from "../abis/TokenFarm.json";
+import Erc20 from "../abis/ERC20.json";
 import { utils, constants } from "ethers";
 import { Contract } from "@ethersproject/contracts";
 
-export const useStakeTokens = () => {
+export const useStakeTokens = (tokenAddress: string) => {
   const { chainId } = useEthers();
 
   const { abi, networks } = TokenFarm;
@@ -11,11 +13,41 @@ export const useStakeTokens = () => {
 
   const tokenFarmData = chainId ? networks[chainId] : undefined;
 
-  const { address: tokenFarmContractAddress } = tokenFarmData || { address: constants.AddressZero};
+  const { address: tokenFarmContractAddress } = tokenFarmData || {
+    address: constants.AddressZero,
+  };
 
-  const contract = new Contract(tokenFarmContractAddress, tokenFarmInterface) 
+  const tokenFarmContract = new Contract(
+    tokenFarmContractAddress,
+    tokenFarmInterface
+  );
 
-  return useContractFunction(contract, "stakeTokens", {
-    transactionName: "Stake tokens",
-  });
+  const { send: stakeTokensSend, state: stakeTokensState } =
+    useContractFunction(tokenFarmContract, "stakeTokens", {
+      transactionName: "Stake tokens",
+    });
+
+  const erc20Interface = new utils.Interface(Erc20.abi);
+
+  const tokenContract = new Contract(tokenAddress, erc20Interface);
+
+  const { send: approveErc20Send, state: approveErc20State } =
+    useContractFunction(tokenContract, "approve", {
+      transactionName: "Approve ERC20 transfer",
+    });
+
+  const [amountToStake, setAmountToStake] = useState("0");
+
+  useEffect(() => {
+    if (approveErc20State.status === "Success") {
+      stakeTokensSend(amountToStake, tokenAddress)
+    }
+  }, [approveErc20State]);
+
+  const send = (amount: string) => {
+    setAmountToStake(amount);
+    return approveErc20Send(tokenFarmContractAddress, amount);
+  };
+
+  return { send, state: stakeTokensState };
 };

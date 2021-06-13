@@ -5,6 +5,7 @@ import { formatUnits } from "@ethersproject/units";
 import { Button, makeStyles } from "@material-ui/core";
 import { Token } from "./Main";
 import { useStakeTokens } from "../hooks/useStakeTokens";
+import { utils } from "ethers"
 
 export interface StakeFormProps {
   token: Token;
@@ -24,21 +25,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const StakeForm = ({ token }: StakeFormProps) => {
-  const { image, address, name } = token;
+  const { image, address: tokenAddress, name } = token;
 
   const { account } = useEthers();
-  const tokenBalance = useTokenBalance(address, account);
+  const tokenBalance = useTokenBalance(tokenAddress, account);
 
   const classes = useStyles();
 
-  const { send: stakeTokensSend, state } = useStakeTokens();
+  const { send: stakeTokensSend, state } = useStakeTokens(tokenAddress);
 
   const formattedTokenBalance: number = tokenBalance
     ? parseFloat(formatUnits(tokenBalance, 18))
     : 0;
 
   const handleStakeSubmit = () => {
-    stakeTokensSend(amount, address);
+    const amountAsWei = utils.parseEther(amount.toString())
+    return stakeTokensSend(amountAsWei.toString());
   };
 
   const [amount, setAmount] =
