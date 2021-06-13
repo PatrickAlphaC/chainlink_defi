@@ -5,6 +5,7 @@ import { formatUnits } from "@ethersproject/units";
 import { Button, makeStyles } from "@material-ui/core";
 import { Token } from "./Main";
 import { useStakeTokens } from "../hooks/useStakeTokens";
+import { useUnstakeTokens } from "../hooks/useUnstakeTokens";
 import { utils } from "ethers"
 
 export interface StakeFormProps {
@@ -32,7 +33,7 @@ export const StakeForm = ({ token }: StakeFormProps) => {
 
   const classes = useStyles();
 
-  const { send: stakeTokensSend, state } = useStakeTokens(tokenAddress);
+  const { send: stakeTokensSend, state: stakeTokensState } = useStakeTokens(tokenAddress);
 
   const formattedTokenBalance: number = tokenBalance
     ? parseFloat(formatUnits(tokenBalance, 18))
