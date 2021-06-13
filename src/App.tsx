@@ -6,13 +6,15 @@ import React from "react";
 // import Navbar from "./Navbar"
 import { Header } from "./features/Header";
 import { Main } from "./features/Main";
-import { DAppProvider } from "@usedapp/core";
+import { ChainId, DAppProvider } from "@usedapp/core";
 import { Container, ThemeProvider } from "@material-ui/core";
 import customTheme from "./themes/chainlink-blue";
 
 export const App = () => {
   return (
-    <DAppProvider config={{}}>
+    <DAppProvider config={{
+      supportedChains: [ChainId.Kovan]
+    }}>
       <ThemeProvider theme={customTheme}>
         <Header />
         <Container maxWidth="md">

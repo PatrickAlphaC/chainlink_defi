@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import chainlink from "../chainlink.png";
 import dapp from "../dapp.png";
 import dai from "../dai.png";
@@ -6,7 +6,12 @@ import { YourWallet } from "./YourWallet";
 import { TokenFarmContract } from "./TokenFarmContract";
 import { useEthers } from "@usedapp/core";
 import DappToken from "../abis/DappToken.json";
-import { Typography, makeStyles } from "@material-ui/core";
+import {
+  Snackbar,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 export type Token = {
   image: string;
@@ -18,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.common.white,
     textAlign: "center",
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
   },
 }));
 
 export const Main = () => {
-  const { chainId } = useEthers();
+  const { chainId, account, error } = useEthers();
 
   const { networks } = DappToken;
 
@@ -31,7 +36,7 @@ export const Main = () => {
 
   const { address: dappTokenAddress } = dappTokenData || {};
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const supportedTokens: Array<Token> = [
     {
@@ -51,6 +56,27 @@ export const Main = () => {
     },
   ];
 
+  const [showNetworkError, setShowNetworkError] = useState(false);
+
+  const handleCloseNetworkError = (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    showNetworkError && setShowNetworkError(false);
+  };
+
+  useEffect(() => {
+    if (error && error.name === "UnsupportedChainIdError") {
+      !showNetworkError && setShowNetworkError(true);
+    } else {
+      showNetworkError && setShowNetworkError(false);
+    }
+  }, [error]);
+
   return (
     <>
       <Typography
@@ -64,6 +90,15 @@ export const Main = () => {
       </Typography>
       <YourWallet supportedTokens={supportedTokens} />
       <TokenFarmContract supportedTokens={supportedTokens} />
+      <Snackbar
+        open={showNetworkError}
+        autoHideDuration={6000}
+        onClose={handleCloseNetworkError}
+      >
+        <Alert onClose={handleCloseNetworkError} severity="warning">
+          You gotta connect to the Kovan network!
+        </Alert>
+      </Snackbar>
     </>
   );
 };
