@@ -3,7 +3,6 @@ import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import { Panel, PanelContent, PanelHeading } from "../components";
 import { Tab } from "@material-ui/core";
 import { Token } from "./Main";
-import { StakingBalance } from "./StakingBalance";
 import { Unstake } from "./Unstake";
 
 interface TokenFarmContractProps {
@@ -34,7 +33,6 @@ export const TokenFarmContract = ({
           {supportedTokens.map((token, index) => {
             return (
               <TabPanel value={index.toString()} key={index}>
-                <StakingBalance token={token} />
                 <Unstake token={token} />
               </TabPanel>
             );

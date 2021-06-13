@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Main = () => {
-  const { chainId, account, error } = useEthers();
+  const { chainId, error } = useEthers();
 
   const { networks } = DappToken;
 
@@ -75,7 +75,7 @@ export const Main = () => {
     } else {
       showNetworkError && setShowNetworkError(false);
     }
-  }, [error]);
+  }, [error, showNetworkError]);
 
   return (
     <>
