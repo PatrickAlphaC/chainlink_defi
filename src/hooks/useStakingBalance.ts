@@ -10,14 +10,14 @@ export const useStakingBalance = (address: string): BigNumber | undefined => {
 
   const tokenFarmData = chainId ? networks[chainId] : undefined;
 
-  const { address: tokenAddress } = tokenFarmData || {}
+  const { address: tokenFarmContractAddress } = tokenFarmData || {}
 
   const [stakingBalance] =
     useContractCall({
       abi: tokenFarmInterface,
-      address: tokenFarmData?.address,
+      address: tokenFarmContractAddress,
       method: "stakingBalance",
-      args: [tokenAddress, account],
+      args: [address, account],
     }) ?? [];
 
   return stakingBalance;

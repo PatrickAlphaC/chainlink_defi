@@ -1,33 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { Slider, Input, Typography, Grid } from "@material-ui/core";
+
+interface SliderInputProps {
+  label: string;
+  id: string;
+  maxValue: number;
+  value: number | string | (string | number)[];
+  onChange: (newValue: number | string | Array<number | string>) => void;
+  [x:string]: any;
+}
 
 export const SliderInput = ({
   label = "",
   id = "input-slider",
-  maxValue = 100,
+  maxValue,
+  value,
+  onChange,
   ...rest
-}) => {
-  const [value, setValue] =
-    useState<number | string | Array<number | string>>(0);
-
+}: SliderInputProps) => {
   const handleSliderChange = (event: any, newValue: number | number[]) => {
-    setValue(newValue);
+    onChange(newValue);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
+    onChange(event.target.value === "" ? "" : Number(event.target.value));
   };
 
   const handleBlur = () => {
     if (value < 0) {
-      setValue(0);
+      onChange(0);
     } else if (value > maxValue) {
-      setValue(maxValue);
+      onChange(maxValue);
     }
   };
 
-  const sliderStep = maxValue / 100
-  const inputStep = maxValue / 50
+  const sliderStep = maxValue / 100;
+  const inputStep = maxValue / 50;
 
   return (
     <div {...rest}>
