@@ -7,22 +7,28 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4),
     display: "flex",
     justifyContent: "flex-end",
+    gap: theme.spacing(1)
   },
 }));
 
 export const Header = () => {
   const classes = useStyles();
 
-  const { account, activateBrowserWallet } = useEthers();
+  const { account, activateBrowserWallet, deactivate } = useEthers();
 
   const isConnected = account !== undefined;
 
   return (
     <div className={classes.container}>
       {isConnected ? (
-        <Button color="primary" variant="contained">
-          {`${account?.slice(0, 4)}...${account?.slice(-3)}`}
-        </Button>
+        <>
+          <Button color="primary" variant="contained">
+            {`${account?.slice(0, 4)}...${account?.slice(-3)}`}
+          </Button>
+          <Button variant="contained" onClick={deactivate}>
+            Disconnect
+          </Button>
+        </>
       ) : (
         <Button
           color="primary"
