@@ -90,7 +90,8 @@ export const StakeForm = ({ token }: StakeFormProps) => {
 
   const isMining = stakeTokensState.status === "Mining";
 
-  const hasZeroAmount = parseFloat(amount.toString()) === 0
+  const hasZeroBalance = formattedTokenBalance === 0
+  const hasZeroAmountSelected = parseFloat(amount.toString()) === 0
 
   return (
     <>
@@ -102,14 +103,14 @@ export const StakeForm = ({ token }: StakeFormProps) => {
           className={classes.slider}
           value={amount}
           onChange={setAmount}
-          disabled={isMining}
+          disabled={isMining || hasZeroBalance}
         />
         <Button
           color="primary"
           variant="contained"
           size="large"
           onClick={handleStakeSubmit}
-          disabled={isMining || hasZeroAmount}
+          disabled={isMining || hasZeroAmountSelected}
         >
           {isMining ? <CircularProgress size={26}/> : "Stake"}
         </Button>
