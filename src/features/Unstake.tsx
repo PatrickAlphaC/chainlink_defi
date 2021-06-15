@@ -3,7 +3,6 @@ import {
   Button,
   CircularProgress,
   Snackbar,
-  Typography,
   makeStyles,
 } from "@material-ui/core";
 import { Token } from "./Main";

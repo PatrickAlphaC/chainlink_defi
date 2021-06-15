@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider, Input, Typography, Grid, makeStyles } from "@material-ui/core";
+import { Slider, Input, Typography, makeStyles } from "@material-ui/core";
 
 interface SliderInputProps {
   label?: string;

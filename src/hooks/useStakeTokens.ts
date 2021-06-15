@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useContractFunction, useEthers } from "@usedapp/core";
 import TokenFarm from "../abis/TokenFarm.json";
 import Erc20 from "../abis/ERC20.json";
@@ -38,15 +38,11 @@ export const useStakeTokens = (tokenAddress: string) => {
 
   const [amountToStake, setAmountToStake] = useState("0");
   
-  const stakeTokensSendCallback = useCallback((...args: any[]) => {
-    stakeTokensSend(...args)
-  }, [])
-
   useEffect(() => {
     if (approveErc20State.status === "Success") {
       stakeTokensSend(amountToStake, tokenAddress);
     }
-  }, [approveErc20State, amountToStake, stakeTokensSendCallback, tokenAddress]);
+  }, [approveErc20State, amountToStake, tokenAddress]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const send = (amount: string) => {
     setAmountToStake(amount);

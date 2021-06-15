@@ -29,6 +29,6 @@ export const BalanceMsg = ({ label, amount, tokenImgSrc }: BalanceMsgProps) => {
     return <div className={classes.container}>
         <Typography component="span">{label}:</Typography>
         <Typography className={classes.amount} component="span">{amount}</Typography>
-        <img className={classes.tokenImg} src={tokenImgSrc} />
+        <img className={classes.tokenImg} src={tokenImgSrc} alt="token logo" />
     </div>
 }

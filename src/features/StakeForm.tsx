@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const StakeForm = ({ token }: StakeFormProps) => {
-  const { image, address: tokenAddress, name } = token;
+  const { address: tokenAddress, name } = token;
 
   const { account } = useEthers();
   const tokenBalance = useTokenBalance(tokenAddress, account);

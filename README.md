@@ -4,6 +4,11 @@ This repo allows you to stake your FAU/LINK/DAPP or any accepted ERC20 and recei
 
 To get started clone this repo.
 
+## Token facuets
+
+- LINK: https://kovan.chain.link/
+- FAU: https://erc20faucet.com/
+
 # Quickstart
 Set your `MNEMONIC` and `KOVAN_RPC_URL` 
 ```
@@ -18,7 +23,7 @@ yarn
 truffle migrate --reset --network live
 yarn start
 ```
-You can now stake and unstake your mDAI. Once you have some staked, you can issue tokens. 
+You can now stake and unstake your LINK or FAU. Once you have some staked, you can issue DAPP tokens. 
 
 To issue tokens run
 ```
