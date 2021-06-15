@@ -4,6 +4,7 @@ import {
   CircularProgress,
   Snackbar,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import { Token } from "./Main";
 import { useUnstakeTokens } from "../hooks/useUnstakeTokens";
@@ -11,10 +12,21 @@ import Alert from "@material-ui/lab/Alert";
 import { useNotifications } from "@usedapp/core";
 import { useStakingBalance } from "../hooks/useStakingBalance";
 import { formatUnits } from "@ethersproject/units";
+import { BalanceMsg } from "../components/BalanceMsg";
 
 export interface UnstakeFormProps {
   token: Token;
 }
+
+const useStyles = makeStyles((theme) => ({
+  contentContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: theme.spacing(2),
+  }
+}));
 
 export const Unstake = ({ token }: UnstakeFormProps) => {
   const { image, address: tokenAddress, name } = token;
@@ -56,20 +68,26 @@ export const Unstake = ({ token }: UnstakeFormProps) => {
 
   const hasZeroAmount = formattedBalance === 0;
 
+  const classes = useStyles();
+
   return (
     <>
-      <Typography>
-        Your staked {name} balance: {formattedBalance}
-      </Typography>
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        onClick={handleUnstakeSubmit}
-        disabled={isMining || hasZeroAmount}
-      >
-        {isMining ? <CircularProgress size={26} /> : `Unstake all ${name}`}
-      </Button>
+      <div className={classes.contentContainer}>
+        <BalanceMsg
+          label={`Your staked ${name} balance`}
+          amount={formattedBalance}
+          tokenImgSrc={image}
+        />
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          onClick={handleUnstakeSubmit}
+          disabled={isMining || hasZeroAmount}
+        >
+          {isMining ? <CircularProgress size={26} /> : `Unstake all ${name}`}
+        </Button>
+      </div>
       <Snackbar
         open={showUnstakeSuccess}
         autoHideDuration={5000}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEthers } from "@usedapp/core";
 import { StakeForm } from "./StakeForm";
-import { Tab } from "@material-ui/core";
+import { Tab, makeStyles } from "@material-ui/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import { Panel, PanelHeading, PanelContent } from "../components";
 import { Token } from "./Main";
@@ -11,6 +11,15 @@ import { ConnectionRequiredMsg } from "./ConnectionRequiredMsg";
 interface YourWalletProps {
   supportedTokens: Array<Token>;
 }
+
+const useStyles = makeStyles((theme) => ({
+  tabContent: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: theme.spacing(4)
+  },
+}));
 
 export const YourWallet = ({ supportedTokens }: YourWalletProps) => {
   const [selectedTokenIndex, setSelectedTokenIndex] = useState<number>(0);
@@ -22,6 +31,8 @@ export const YourWallet = ({ supportedTokens }: YourWalletProps) => {
   const { account } = useEthers();
 
   const isConnected = account !== undefined;
+
+  const classes = useStyles();
 
   return (
     <Panel>
@@ -43,8 +54,12 @@ export const YourWallet = ({ supportedTokens }: YourWalletProps) => {
             {supportedTokens.map((token, index) => {
               return (
                 <TabPanel value={index.toString()} key={index}>
-                  <WalletBalance token={supportedTokens[selectedTokenIndex]} />
-                  <StakeForm token={supportedTokens[selectedTokenIndex]} />
+                  <div className={classes.tabContent}>
+                    <WalletBalance
+                      token={supportedTokens[selectedTokenIndex]}
+                    />
+                    <StakeForm token={supportedTokens[selectedTokenIndex]} />
+                  </div>
                 </TabPanel>
               );
             })}

@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: theme.spacing(4),
+    gap: theme.spacing(2),
+    width: "100%"
   },
   slider: {
     width: "100%",

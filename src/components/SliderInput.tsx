@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider, Input, Typography, Grid } from "@material-ui/core";
+import { Slider, Input, Typography, Grid, makeStyles } from "@material-ui/core";
 
 interface SliderInputProps {
   label?: string;
@@ -8,8 +8,19 @@ interface SliderInputProps {
   value: number | string | (string | number)[];
   onChange: (newValue: number | string | Array<number | string>) => void;
   disabled?: boolean;
-  [x:string]: any;
+  [x: string]: any;
 }
+
+const useStyles = makeStyles((theme) => ({
+  inputsContainer: {
+    display: "grid",
+    alignItems: "center",
+    gap: theme.spacing(2),
+    gridTemplateRows: "auto",
+    gridTemplateColumns: "1fr auto",
+  },
+  slider: {},
+}));
 
 export const SliderInput = ({
   label = "",
@@ -39,6 +50,8 @@ export const SliderInput = ({
   const sliderStep = maxValue / 100;
   const inputStep = maxValue / 50;
 
+  const classes = useStyles();
+
   return (
     <div {...rest}>
       {label && (
@@ -46,8 +59,8 @@ export const SliderInput = ({
           {label}
         </Typography>
       )}
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs>
+      <div className={classes.inputsContainer}>
+        <div>
           <Slider
             value={typeof value === "number" ? value : 0}
             step={sliderStep}
@@ -56,8 +69,8 @@ export const SliderInput = ({
             max={maxValue}
             disabled={disabled}
           />
-        </Grid>
-        <Grid item>
+        </div>
+        <div>
           <Input
             value={value}
             margin="dense"
@@ -72,8 +85,8 @@ export const SliderInput = ({
               "aria-labelledby": id,
             }}
           />
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </div>
   );
 };
