@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useEthers } from "@usedapp/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import { Panel, PanelContent, PanelHeading } from "../components";
 import { Tab } from "@material-ui/core";
 import { Token } from "./Main";
 import { Unstake } from "./Unstake";
+import { ConnectionRequiredMsg } from "./ConnectionRequiredMsg";
 
 interface TokenFarmContractProps {
   supportedTokens: Array<Token>;
@@ -18,26 +20,38 @@ export const TokenFarmContract = ({
     setSelectedTokenIndex(parseInt(newValue));
   };
 
+  const { account } = useEthers();
+
+  const isConnected = account !== undefined;
+
   return (
     <Panel>
       <PanelHeading>The TokenFarm Contract</PanelHeading>
       <PanelContent>
-        <TabContext value={selectedTokenIndex.toString()}>
-          <TabList onChange={handleChange} aria-label="stake form tabs">
+        {isConnected ? (
+          <TabContext value={selectedTokenIndex.toString()}>
+            <TabList onChange={handleChange} aria-label="stake form tabs">
+              {supportedTokens.map((token, index) => {
+                return (
+                  <Tab
+                    label={token.name}
+                    value={index.toString()}
+                    key={index}
+                  />
+                );
+              })}
+            </TabList>
             {supportedTokens.map((token, index) => {
               return (
-                <Tab label={token.name} value={index.toString()} key={index} />
+                <TabPanel value={index.toString()} key={index}>
+                  <Unstake token={token} />
+                </TabPanel>
               );
             })}
-          </TabList>
-          {supportedTokens.map((token, index) => {
-            return (
-              <TabPanel value={index.toString()} key={index}>
-                <Unstake token={token} />
-              </TabPanel>
-            );
-          })}
-        </TabContext>
+          </TabContext>
+        ) : (
+          <ConnectionRequiredMsg />
+        )}
       </PanelContent>
     </Panel>
   );
