@@ -14,7 +14,6 @@ interface SliderInputProps {
 const useStyles = makeStyles((theme) => ({
   inputsContainer: {
     display: "grid",
-    alignItems: "center",
     gap: theme.spacing(3),
     gridTemplateRows: "auto",
     gridTemplateColumns: "1fr auto",
