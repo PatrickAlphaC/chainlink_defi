@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   inputsContainer: {
     display: "grid",
     alignItems: "center",
-    gap: theme.spacing(2),
+    gap: theme.spacing(3),
     gridTemplateRows: "auto",
     gridTemplateColumns: "1fr auto",
   },
@@ -52,6 +52,17 @@ export const SliderInput = ({
 
   const classes = useStyles();
 
+  const sliderMarks = [
+    {
+      value: 0,
+      label: "0%",
+    },
+    {
+      value: maxValue,
+      label: "100%",
+    },
+  ];
+
   return (
     <div {...rest}>
       {label && (
@@ -68,6 +79,7 @@ export const SliderInput = ({
             aria-labelledby={id}
             max={maxValue}
             disabled={disabled}
+            marks={disabled ? [] : sliderMarks}
           />
         </div>
         <div>
