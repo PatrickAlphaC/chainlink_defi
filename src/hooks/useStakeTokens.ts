@@ -5,6 +5,14 @@ import Erc20 from "../abis/ERC20.json";
 import { utils, constants } from "ethers";
 import { Contract } from "@ethersproject/contracts";
 
+/**
+ * This hook is a bit messy but exposes a 'send' which makes two transactions.
+ * The first transaction is to approve the ERC-20 token transfer on the token's contract.
+ * Upon successful approval, a second transaction is initiated to execute the transfer by the TokenFarm contract.
+ * The 'state' returned by this hook is the state of the first transaction until that has status "Succeeded".
+ * After that it is the state of the second transaction.
+ * @param tokenAddress - The token address of the token we wish to stake
+ */
 export const useStakeTokens = (tokenAddress: string) => {
   const { chainId } = useEthers();
 
@@ -37,7 +45,7 @@ export const useStakeTokens = (tokenAddress: string) => {
     });
 
   const [amountToStake, setAmountToStake] = useState("0");
-  
+
   useEffect(() => {
     if (approveErc20State.status === "Success") {
       stakeTokensSend(amountToStake, tokenAddress);

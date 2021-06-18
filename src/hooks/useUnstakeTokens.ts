@@ -3,6 +3,9 @@ import TokenFarm from "../abis/TokenFarm.json";
 import { utils, constants } from "ethers";
 import { Contract } from "@ethersproject/contracts";
 
+/**
+ * Expose { send, state } object to facilitate unstaking the user's tokens from the TokenFarm contract
+ */
 export const useUnstakeTokens = () => {
   const { chainId } = useEthers();
 

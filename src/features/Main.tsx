@@ -6,11 +6,7 @@ import { YourWallet } from "./yourWallet";
 import { TokenFarmContract } from "./tokenFarmContract";
 import { useEthers } from "@usedapp/core";
 import DappToken from "../abis/DappToken.json";
-import {
-  Snackbar,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { Snackbar, Typography, makeStyles } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
 export type Token = {
@@ -30,14 +26,17 @@ const useStyles = makeStyles((theme) => ({
 export const Main = () => {
   const { chainId, error } = useEthers();
 
-  const { networks } = DappToken;
-
-  const dappTokenData = chainId ? networks[chainId] : undefined;
-
-  const { address: dappTokenAddress } = dappTokenData || {};
-
   const classes = useStyles();
 
+  // We need to pull the DAPP token address from the .json file written to by Truffle
+  const { networks } = DappToken;
+  const dappTokenData = chainId ? networks[chainId] : undefined;
+  const { address: dappTokenAddress } = dappTokenData || {};
+
+  /**
+   * Our single central location to store info on support tokens.
+   * This is the only place you'll need to add a new token to get it to display in the UI!
+   */
   const supportedTokens: Array<Token> = [
     {
       image: chainlink,
@@ -69,6 +68,11 @@ export const Main = () => {
     showNetworkError && setShowNetworkError(false);
   };
 
+  /**
+   * useEthers will return a populated 'error' field when something has gone wrong.
+   * We can inspect the name of this error and conditionally show a notification
+   * that the user is connected to the wrong network.
+   */
   useEffect(() => {
     if (error && error.name === "UnsupportedChainIdError") {
       !showNetworkError && setShowNetworkError(true);
