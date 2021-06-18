@@ -3,10 +3,14 @@ import { useEthers } from "@usedapp/core";
 import { StakeForm } from "./StakeForm";
 import { Tab, makeStyles } from "@material-ui/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
-import { Panel, PanelHeading, PanelContent } from "../components";
-import { Token } from "./Main";
+import {
+  Panel,
+  PanelHeading,
+  PanelContent,
+  ConnectionRequiredMsg,
+} from "../../components";
+import { Token } from "../Main";
 import { WalletBalance } from "./WalletBalance";
-import { ConnectionRequiredMsg } from "./ConnectionRequiredMsg";
 
 interface YourWalletProps {
   supportedTokens: Array<Token>;
@@ -17,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: theme.spacing(4)
+    gap: theme.spacing(4),
   },
 }));
 

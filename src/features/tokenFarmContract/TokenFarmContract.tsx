@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useEthers } from "@usedapp/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
-import { Panel, PanelContent, PanelHeading } from "../components";
+import {
+  Panel,
+  PanelContent,
+  PanelHeading,
+  ConnectionRequiredMsg,
+} from "../../components";
 import { Tab } from "@material-ui/core";
-import { Token } from "./Main";
+import { Token } from "../Main";
 import { Unstake } from "./Unstake";
-import { ConnectionRequiredMsg } from "./ConnectionRequiredMsg";
 
 interface TokenFarmContractProps {
   supportedTokens: Array<Token>;

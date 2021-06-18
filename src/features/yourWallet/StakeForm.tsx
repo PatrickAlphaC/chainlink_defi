@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SliderInput } from "../components";
+import { SliderInput } from "../../components";
 import { useEthers, useTokenBalance, useNotifications } from "@usedapp/core";
 import { formatUnits } from "@ethersproject/units";
 import {
@@ -8,8 +8,8 @@ import {
   Snackbar,
   makeStyles,
 } from "@material-ui/core";
-import { Token } from "./Main";
-import { useStakeTokens } from "../hooks/useStakeTokens";
+import { Token } from "../Main";
+import { useStakeTokens } from "../../hooks";
 import { utils } from "ethers";
 import Alert from "@material-ui/lab/Alert";
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     gap: theme.spacing(2),
-    width: "100%"
+    width: "100%",
   },
   slider: {
     width: "100%",
@@ -90,8 +90,8 @@ export const StakeForm = ({ token }: StakeFormProps) => {
 
   const isMining = stakeTokensState.status === "Mining";
 
-  const hasZeroBalance = formattedTokenBalance === 0
-  const hasZeroAmountSelected = parseFloat(amount.toString()) === 0
+  const hasZeroBalance = formattedTokenBalance === 0;
+  const hasZeroAmountSelected = parseFloat(amount.toString()) === 0;
 
   return (
     <>
@@ -112,7 +112,7 @@ export const StakeForm = ({ token }: StakeFormProps) => {
           onClick={handleStakeSubmit}
           disabled={isMining || hasZeroAmountSelected}
         >
-          {isMining ? <CircularProgress size={26}/> : "Stake"}
+          {isMining ? <CircularProgress size={26} /> : "Stake"}
         </Button>
       </div>
       <Snackbar

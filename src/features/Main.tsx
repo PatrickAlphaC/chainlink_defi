@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import chainlink from "../chainlink.png";
 import dapp from "../dapp.png";
 import dai from "../dai.png";
-import { YourWallet } from "./YourWallet";
-import { TokenFarmContract } from "./TokenFarmContract";
+import { YourWallet } from "./yourWallet";
+import { TokenFarmContract } from "./tokenFarmContract";
 import { useEthers } from "@usedapp/core";
 import DappToken from "../abis/DappToken.json";
 import {

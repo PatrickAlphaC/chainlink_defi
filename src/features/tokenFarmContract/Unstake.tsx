@@ -5,13 +5,12 @@ import {
   Snackbar,
   makeStyles,
 } from "@material-ui/core";
-import { Token } from "./Main";
-import { useUnstakeTokens } from "../hooks/useUnstakeTokens";
+import { Token } from "../Main";
+import { useUnstakeTokens, useStakingBalance } from "../../hooks";
 import Alert from "@material-ui/lab/Alert";
 import { useNotifications } from "@usedapp/core";
-import { useStakingBalance } from "../hooks/useStakingBalance";
 import { formatUnits } from "@ethersproject/units";
-import { BalanceMsg } from "../components/BalanceMsg";
+import { BalanceMsg } from "../../components";
 
 export interface UnstakeFormProps {
   token: Token;
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-start",
     gap: theme.spacing(2),
-  }
+  },
 }));
 
 export const Unstake = ({ token }: UnstakeFormProps) => {
