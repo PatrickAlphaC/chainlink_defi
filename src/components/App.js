@@ -115,11 +115,11 @@ class App extends Component {
     this.state.erc20.methods
       .approve(this.state.tokenFarm._address, amount)
       .send({ from: this.state.account })
-      .on("transactionHash", (hash) => {
+      .on("receipt", (hash) => {
         this.state.tokenFarm.methods
           .stakeTokens(amount, tokenAddress)
           .send({ from: this.state.account })
-          .on("transactionHash", (hash) => {
+          .on("receipt", (hash) => {
             this.setState({ loading: false })
           })
       })
